@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Гуленко Назар">
+
+<title>Курсова робота по економетриці на тему: Дослідження впливу різних факторів на банкрутство компаній</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Coursework_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Coursework_files/libs/quarto-html/quarto.js"></script>
+<script src="Coursework_files/libs/quarto-html/popper.min.js"></script>
+<script src="Coursework_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Coursework_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Coursework_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Coursework_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Coursework_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Coursework_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Coursework_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Зміст</h2>
+   
+  <ul class="collapse">
+  <li><a href="#план" id="toc-план" class="nav-link active" data-scroll-target="#план">План</a></li>
+  <li><a href="#вступ" id="toc-вступ" class="nav-link" data-scroll-target="#вступ">Вступ</a>
+  <ul class="collapse">
+  <li><a href="#пояснення-змінних-у-датасеті-та-підготовка-данних" id="toc-пояснення-змінних-у-датасеті-та-підготовка-данних" class="nav-link" data-scroll-target="#пояснення-змінних-у-датасеті-та-підготовка-данних">Пояснення змінних у датасеті та підготовка данних</a></li>
+  </ul></li>
+  <li><a href="#побудова-млр-за-мнк" id="toc-побудова-млр-за-мнк" class="nav-link" data-scroll-target="#побудова-млр-за-мнк">Побудова МЛР за МНК</a>
+  <ul class="collapse">
+  <li><a href="#підготовка-вибірки" id="toc-підготовка-вибірки" class="nav-link" data-scroll-target="#підготовка-вибірки">Підготовка вибірки</a></li>
+  <li><a href="#пошук-найкращої-млр" id="toc-пошук-найкращої-млр" class="nav-link" data-scroll-target="#пошук-найкращої-млр">Пошук найкращої МЛР</a></li>
+  </ul></li>
+  <li><a href="#дослідження-автокореляції" id="toc-дослідження-автокореляції" class="nav-link" data-scroll-target="#дослідження-автокореляції">Дослідження автокореляції</a>
+  <ul class="collapse">
+  <li><a href="#тест-дарбіна-вотсона" id="toc-тест-дарбіна-вотсона" class="nav-link" data-scroll-target="#тест-дарбіна-вотсона">Тест Дарбіна-Вотсона</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Курсова робота по економетриці на тему: Дослідження впливу різних факторів на банкрутство компаній</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Автор</div>
+    <div class="quarto-title-meta-contents">
+             <p>Гуленко Назар </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="план" class="level1">
+<h1>План</h1>
+<p>1)Вступ</p>
+<p>2)Побудова МЛР за МНК. Пошук найкращої МЛР. Перевірка моделі на нульову гіпотезу та наявність статистично значущого взаємозв’язку між змінними</p>
+<p>3)Дослідження автокореляці</p>
+<p>4)Перевірка моделі на явність явища гетероскедастичності</p>
+<p>5)Висоновок</p>
+</section>
+<section id="вступ" class="level1">
+<h1>Вступ</h1>
+<p>У сучасному світі економічна стійкість компаній є одним із найважливіших факторів успішного функціонування на ринку. Проблема банкрутства є серйозним викликом для бізнесу та має потенційно негативний вплив на економіку в цілому. Тому дослідження впливу різних факторів на банкрутство компаній стає актуальною та значущою темою в галузі економетрики.</p>
+<p>Метою даної курсової роботи є проведення дослідження та аналіз впливу різних факторів на ризик банкрутства компаній. Застосовуючи методи економетрики, ми намагатимемося встановити статистичні зв’язки між різними економічними показниками та ймовірністю банкрутства, а також виявити ключові фактори, що впливають на цей процес.</p>
+<p>У рамках роботи будуть розглянуті різні аспекти, такі як фінансові показники, економічне середовище, управлінські рішення та інші фактори, які можуть впливати на стан компаній і їхню здатність виживати на ринку. Також будуть використані статистичні методи для моделювання ймовірності банкрутства і оцінки впливу окремих факторів.</p>
+<p>Результати даного дослідження можуть мати практичне значення для підприємців, менеджерів, інвесторів та інших зацікавлених сторін. Розуміння факторів, що спричиняють банкрутство, допоможе компаніям уникнути фінансових ризиків.</p>
+<section id="пояснення-змінних-у-датасеті-та-підготовка-данних" class="level2">
+<h2 class="anchored" data-anchor-id="пояснення-змінних-у-датасеті-та-підготовка-данних">Пояснення змінних у датасеті та підготовка данних</h2>
+<p>Підключаємо бібліотеки для роботи та читаємо файл з даними</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,819 × 96
+   Bankrupt. ROA.C..before.interest.and.depreciation.be…¹ ROA.A..before.intere…²
+       &lt;dbl&gt;                                        &lt;dbl&gt;                  &lt;dbl&gt;
+ 1         1                                        0.371                  0.424
+ 2         1                                        0.464                  0.538
+ 3         1                                        0.426                  0.499
+ 4         1                                        0.400                  0.451
+ 5         1                                        0.465                  0.538
+ 6         1                                        0.389                  0.415
+ 7         0                                        0.391                  0.446
+ 8         0                                        0.508                  0.571
+ 9         0                                        0.489                  0.545
+10         0                                        0.496                  0.551
+# ℹ 6,809 more rows
+# ℹ abbreviated names:
+#   ¹​ROA.C..before.interest.and.depreciation.before.interest,
+#   ²​ROA.A..before.interest.and...after.tax
+# ℹ 93 more variables: ROA.B..before.interest.and.depreciation.after.tax &lt;dbl&gt;,
+#   Operating.Gross.Margin &lt;dbl&gt;, Realized.Sales.Gross.Margin &lt;dbl&gt;,
+#   Operating.Profit.Rate &lt;dbl&gt;, Pre.tax.net.Interest.Rate &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Показник</th>
+<th>Коротке пояснення</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X1 - ROA(C) before interest and depreciation before interest: Return On Total Assets(C)</td>
+<td>ROA (C) відображає відношення прибутку до загальних активів компанії, враховуючи витрати на відсотки та амортизацію.</td>
+</tr>
+<tr class="even">
+<td>X2 - ROA(A) before interest and % after tax: Return On Total Assets(A)</td>
+<td>ROA (A) відображає відношення прибутку до загальних активів компанії, враховуючи витрати на відсотки та оподаткування.</td>
+</tr>
+<tr class="odd">
+<td>X3 - ROA(B) before interest and depreciation after tax: Return On Total Assets(B)</td>
+<td>ROA (B) відображає відношення прибутку до загальних активів компанії, враховуючи витрати на відсотки, оподаткування та амортизацію.</td>
+</tr>
+<tr class="even">
+<td>X4 - Operating Gross Margin: Gross Profit/Net Sales</td>
+<td>Операційна валова маржа відображає відношення валового прибутку компанії до її чистого обороту, що вказує на ефективність її операційного бізнесу.</td>
+</tr>
+<tr class="odd">
+<td>X5 - Realized Sales Gross Margin: Realized Gross Profit/Net Sales</td>
+<td>Реалізована валова маржа продажів відображає відношення реалізованого валового прибутку компанії до її чистого обороту, що вказує на ефективність продажу продукції або послуг.</td>
+</tr>
+<tr class="even">
+<td>X6 - Operating Profit Rate: Operating Income/Net Sales</td>
+<td>Рівень операційного прибутку відображає відношення операційного доходу компанії до її чистого обороту.</td>
+</tr>
+<tr class="odd">
+<td>X7 - Pre-tax net Interest Rate: Pre-Tax Income/Net Sales</td>
+<td>Відношення попереднього чистого доходу до виручки і вказує на частку чистого прибутку, яка залишається після врахування всіх витрат та податків від загального обсягу виручки.</td>
+</tr>
+<tr class="even">
+<td>X8 - After-tax net Interest Rate: Net Income/Net Sales</td>
+<td>Відношення післяподаткового чистого доходу до виручки і вказує на частку чистого прибутку, яка залишається після врахування податків від загального обсягу виручки.</td>
+</tr>
+<tr class="odd">
+<td>X9 - Non-industry income and expenditure/revenue: Net Non-operating Income Ratio</td>
+<td>Відношення чистого прибутку, який не пов’язаний з основною галуззю діяльності, до виручки. Він вказує на частку прибутку, яка виникає внаслідок діяльності, не пов’язаної з основною діяльністю компанії.</td>
+</tr>
+<tr class="even">
+<td>X10 - Continuous interest rate (after tax): Net Income-Exclude Disposal Gain or Loss/Net Sales</td>
+<td>Відношення чистого доходу, не включаючи прибуток або збиток від розпорядження активами, до чистого обороту. Це показник, який вказує на стабільність та постійність прибутковості компанії після врахування оподаткування.</td>
+</tr>
+<tr class="odd">
+<td>X11 - Operating Expense Rate: Operating Expenses/Net Sales</td>
+<td>Відношення витрат на операції до чистого обороту і вказує на частку витрат, пов’язаних з операційною діяльністю, від загального обсягу виручки.</td>
+</tr>
+<tr class="even">
+<td>X12 - Research and development expense rate: (Research and Development Expenses)/Net Sales</td>
+<td>Відношення витрат на дослідження та розвиток до чистого обороту компанії. Він вказує на частку коштів, витрачених на дослідження нових продуктів, технологій або покращення існуючих продуктів, у порівнянні з загальним оборотом компанії.</td>
+</tr>
+<tr class="odd">
+<td>X13 - Cash flow rate: Cash Flow from Operating/Current Liabilities</td>
+<td>Відношення грошового потоку, отриманого від операційної діяльності, до поточних зобов’язань компанії. Він вказує на здатність компанії погасити свої поточні зобов’язання за рахунок генерування грошових потоків.</td>
+</tr>
+<tr class="even">
+<td>X14 - Interest-bearing debt interest rate: Interest-bearing Debt/Equity</td>
+<td>Цей термін визначає відношення витрат на проценти за позиками до власного капіталу компанії. Він вказує на величину процентних платежів, що становлять частку від власного капіталу компанії.</td>
+</tr>
+<tr class="odd">
+<td>X15 - Tax rate (A): Effective Tax Rate</td>
+<td>Цей термін відсилає до ефективної податкової ставки компанії (A). Він вказує на відсоток прибутку, який сплачується у вигляді податків у порівнянні з прибутком компанії.</td>
+</tr>
+<tr class="even">
+<td>X16 - Net Value Per Share (B): Book Value Per Share(B)</td>
+<td>Цей термін вказує на чисту вартість, яка припадає на одну акцію (B) компанії. Вона обчислюється шляхом поділу чистого прибутку на кількість акцій компанії.</td>
+</tr>
+<tr class="odd">
+<td>X17 - Net Value Per Share (A): Book Value Per Share(A)</td>
+<td>Цей термін вказує на чисту вартість, яка припадає на одну акцію (A) компанії. Вона обчислюється шляхом поділу чистого прибутку на кількість акцій компанії.</td>
+</tr>
+<tr class="even">
+<td>X18 - Net Value Per Share (C): Book Value Per Share(C)</td>
+<td>Цей термін вказує на чисту вартість, яка припадає на одну акцію (C) компанії. Вона обчислюється шляхом поділу чистого прибутку на кількість акцій компанії.</td>
+</tr>
+<tr class="odd">
+<td>X19 - Persistent EPS in the Last Four Seasons: EPS-Net Income</td>
+<td>Цей термін вказує на постійний прибуток на акцію (EPS) компанії за останні чотири сезони. Він представляє середнє значення прибутку на акцію за цей період.</td>
+</tr>
+<tr class="even">
+<td>X20 - Cash Flow Per Share</td>
+<td>Цей термін вказує на грошовий потік, який припадає на одну акцію компанії. Він обчислюється шляхом поділу загального грошового потоку на кількість акцій компанії.</td>
+</tr>
+<tr class="odd">
+<td>X21 - Revenue Per Share (Yuan ¥): Sales Per Share</td>
+<td>Цей термін вказує на виручку, яка припадає на одну акцію компанії, виміряну в юанях ¥.</td>
+</tr>
+<tr class="even">
+<td>X22 - Operating Profit Per Share (Yuan ¥): Operating Income Per Share</td>
+<td>Цей термін вказує на операційний прибуток, який припадає на одну акцію компанії, виміряний в юанях ¥.</td>
+</tr>
+<tr class="odd">
+<td>X23 - Per Share Net profit before tax (Yuan ¥): Pretax Income Per Share</td>
+<td>Цей термін вказує на прибуток до оподаткування, який припадає на одну акцію компанії, виміряний в юанях ¥.</td>
+</tr>
+<tr class="even">
+<td>X24 - Realized Sales Gross Profit Growth Rate</td>
+<td>Цей термін визначає темп зростання реалізованого валового прибутку від продажу продукції або послуг компанії.</td>
+</tr>
+<tr class="odd">
+<td>X25 - Operating Profit Growth Rate: Operating Income Growth</td>
+<td>Цей термін визначає темп зростання операційного прибутку компанії. Він показує, наскільки швидко зростає операційний прибуток компанії протягом певного періоду.</td>
+</tr>
+<tr class="even">
+<td>X26 - After-tax Net Profit Growth Rate: Net Income Growth</td>
+<td>Цей термін вказує на темп зростання післяподаткового чистого прибутку компанії. Він показує, наскільки швидко зростає чистий прибуток компанії після врахування податків протягом певного періоду</td>
+</tr>
+<tr class="odd">
+<td>X27 - Regular Net Profit Growth Rate: Continuing Operating Income after Tax Growth</td>
+<td>Цей термін вказує на темп зростання постійного чистого прибутку компанії. Він показує, наскільки швидко зростає чистий прибуток компанії без урахування прибутку або збитку від розпорядження активами протягом певного періоду.</td>
+</tr>
+<tr class="even">
+<td>X28 - Continuous Net Profit Growth Rate: Net Income-Excluding Disposal Gain or Loss Growth</td>
+<td>Цей термін вказує на темп зростання постійного чистого прибутку компанії. Він показує, наскільки швидко зростає чистий прибуток компанії без урахування прибутку або збитку від розпорядження активами протягом певного періоду.</td>
+</tr>
+<tr class="odd">
+<td>X29 - Total Asset Growth Rate: Total Asset Growth</td>
+<td>Цей термін вказує на темп зростання загальних активів компанії. Він показує, наскільки швидко зростають активи компанії протягом певного періоду.</td>
+</tr>
+<tr class="even">
+<td>X30 - Net Value Growth Rate: Total Equity Growth</td>
+<td>Цей термін вказує на темп зростання власного капіталу компанії. Він показує, наскільки швидко зростає чиста вартість компанії протягом певного періоду.</td>
+</tr>
+<tr class="odd">
+<td>X31 - Total Asset Return Growth Rate Ratio: Return on Total Asset Growth</td>
+<td>Цей термін вказує на відношення темпу зростання доходу від загальних активів компанії. Він показує, наскільки ефективно компанія генерує дохід від своїх активів протягом певного періоду.</td>
+</tr>
+<tr class="even">
+<td>X32 - Cash Reinvestment %: Cash Reinvestment Ratio</td>
+<td>Цей термін вказує на відношення власного капіталу компанії до загальних активів. Він показує, наскільки компанія фінансується власним капіталом в порівнянні з позиченими коштами.</td>
+</tr>
+<tr class="odd">
+<td>X33 - Current Ratio</td>
+<td>Цей термін вказує на співвідношення поточних активів до поточних зобов’язань компанії. Воно використовується для визначення фінансової стійкості компанії та її здатності виконувати поточні зобов’язання.</td>
+</tr>
+<tr class="even">
+<td>X34 - Quick Ratio: Acid Test</td>
+<td>Цей термін вказує на співвідношення поточних активів, за винятком запасів, до поточних зобов’язань компанії. Воно дає уявлення про здатність компанії швидко погасити свої поточні зобов’язання без продажу запасів.</td>
+</tr>
+<tr class="odd">
+<td>X35 - Interest Expense Ratio: Interest Expenses/Total Revenue</td>
+<td>Відношення витрат на відсотки до загального доходу: Цей термін вказує на відношення витрат компанії на відсотки до її загального доходу. Він використовується для оцінки фінансової стійкості компанії та її здатності відшкодовувати витрати на позичковий капітал.</td>
+</tr>
+<tr class="even">
+<td>X36 - Total debt/Total net worth: Total Liability/Equity Ratio</td>
+<td>Цей термін вказує на відсоток загального зобов’язання компанії до її чистої вартості або власного капіталу. Він використовується для оцінки фінансової стійкості компанії та ризику, пов’язаного з її рівнем зобов’язань.</td>
+</tr>
+<tr class="odd">
+<td>X37 - Debt ratio %: Liability/Total Assets</td>
+<td>Цей термін вказує на відношення зобов’язань компанії до її загальних активів. Він використовується для оцінки фінансової стійкості компанії та ступеня її залежності від позичкових коштів.</td>
+</tr>
+<tr class="even">
+<td>X38 - Net worth/Assets: Equity/Total Assets</td>
+<td>Відношення власного капіталу до активів: Цей термін вказує на відношення власного капіталу компанії до її загальних активів. Він використовується для оцінки фінансової стійкості компанії та рівня її власних ресурсів у порівнянні з позичковими коштами.</td>
+</tr>
+<tr class="odd">
+<td>X39 - Long-term fund suitability ratio (A): (Long-term Liability+Equity)/Fixed Assets</td>
+<td>Цей термін вказує на відношення суми довгострокових зобов’язань та власного капіталу компанії до її основних засобів. Він використовується для оцінки структури фінансування компанії та її залежності від зовнішнього фінансування.</td>
+</tr>
+<tr class="even">
+<td>X40 - Borrowing dependency: Cost of Interest-bearing Debt</td>
+<td>Цей термін вказує на вартість позичкового капіталу, який компанія використовує для фінансування своєї діяльності. Він використовується для оцінки залежності компанії від зовнішнього фінансування та ризику, пов’язаного з позичковими зобов’язаннями.</td>
+</tr>
+<tr class="odd">
+<td>X41 - Contingent liabilities/Net worth: Contingent Liability/Equity</td>
+<td>Цей термін вказує на відношення потенційних зобов’язань компанії до її власного капіталу. Він використовується для оцінки ризику, пов’язаного з потенційними зобов’язаннями, такими як гарантії, контракти та інші зобов’язання, які можуть виникнути у майбутньому.</td>
+</tr>
+<tr class="even">
+<td>X42 - Operating profit/Paid-in capital: Operating Income/Capital</td>
+<td>Цей термін вказує на відношення операційного прибутку компанії до її статутного капіталу або власного капіталу. Він використовується для оцінки рентабельності капіталу, який внесений у компанію.</td>
+</tr>
+<tr class="odd">
+<td>X43 - Net profit before tax/Paid-in capital: Pretax Income/Capital</td>
+<td>Цей термін вказує на відношення прибутку до оподаткування компанії на акцію до її статутного капіталу або власного капіталу. Він використовується для оцінки рентабельності капіталу, який внесений у компанію після оподаткування.</td>
+</tr>
+<tr class="even">
+<td>X44 - Inventory and accounts receivable/Net value: (Inventory+Accounts Receivables)/Equity</td>
+<td>Цей термін вказує на відношення загальної вартості запасів та розрахункових рахунків компанії до її чистої вартості або власного капіталу. Він використовується для оцінки ефективності управління запасами та розрахунковими рахунками компанії.</td>
+</tr>
+<tr class="odd">
+<td>X45 - Total Asset Turnover</td>
+<td>Цей термін вказує на кількість разів, які активи компанії повертаються протягом певного періоду, зазвичай річного. Він використовується для оцінки ефективності використання активів компанією.</td>
+</tr>
+<tr class="even">
+<td>X46 - Accounts Receivable Turnover</td>
+<td>Цей термін вказує на кількість разів, які розрахункові рахунки компанії повертаються протягом певного періоду, зазвичай річного. Він використовується для оцінки ефективності управління розрахунковими рахунками компанії.</td>
+</tr>
+<tr class="odd">
+<td>X47 - Average Collection Days: Days Receivable Outstanding</td>
+<td>Цей термін вказує на середню тривалість в днях, протягом якої компанія збирає кошти від своїх клієнтів. Він використовується для оцінки ефективності управління потоками грошей компанії.</td>
+</tr>
+<tr class="even">
+<td>X48 - Inventory Turnover Rate (times)</td>
+<td>Цей термін вказує на кількість разів, які запаси компанії повертаються протягом певного періоду, зазвичай річного. Він використовується для оцінки ефективності управління запасами компанії.</td>
+</tr>
+<tr class="odd">
+<td>X49 - Fixed Assets Turnover Frequency</td>
+<td>Цей термін вказує на кількість разів, які основні засоби компанії повертаються протягом певного періоду, зазвичай річного. Він використовується для оцінки ефективності використання основних засобів компанією.</td>
+</tr>
+<tr class="even">
+<td>X50 - Net Worth Turnover Rate (times): Equity Turnover</td>
+<td>Цей термін вказує на кількість разів, які власний капітал компанії повертається протягом певного періоду, зазвичай річного. Він використовується для оцінки ефективності використання власного капіталу компанією.</td>
+</tr>
+<tr class="odd">
+<td>X51 - Revenue per person: Sales Per Employee</td>
+<td>Цей термін вказує на суму виручки, яку компанія отримує на одного працівника. Він використовується для оцінки продуктивності компанії на основі генерування виручки від кожного працівника.</td>
+</tr>
+<tr class="even">
+<td>X52 - Operating profit per person: Operation Income Per Employee</td>
+<td>Цей термін вказує на суму прибутку, яку компанія отримує на одного працівника. Він використовується для оцінки ефективності компанії на основі генерування прибутку від кожного працівника.</td>
+</tr>
+<tr class="odd">
+<td>X53 - Allocation rate per person: Fixed Assets Per Employee</td>
+<td>Цей термін вказує на суму чистого прибутку, яку компанія отримує на одного працівника. Він використовується для оцінки ефективності компанії на основі генерування чистого прибутку від кожного працівника.</td>
+</tr>
+<tr class="even">
+<td>X54 - Working Capital to Total Assets</td>
+<td>Цей термін відноситься до розподілу активів компанії на різні категорії або види активів. Він може вказувати на розмір та склад активів, такі як грошові кошти, запаси, основні засоби, інвестиції тощо.</td>
+</tr>
+<tr class="odd">
+<td>X55 - Quick Assets/Total Assets</td>
+<td>Цей термін вказує на відношення всіх активів на кількість всіх працівників.</td>
+</tr>
+<tr class="even">
+<td>X56 - Current Assets/Total Assets</td>
+<td>Цей термін вказує на відношення всіх витрат на кількість всіх працівників.</td>
+</tr>
+<tr class="odd">
+<td>X57 - Cash/Total Assets</td>
+<td>Цей термін вказує на відношення всього капіталу на кількість всіх працівників.</td>
+</tr>
+<tr class="even">
+<td>X58 - Quick Assets/Current Liability</td>
+<td>Цей термін відноситься до розподілу активів компанії на різні категорії або види активів. Він може вказувати на розмір та склад активів, такі як грошові кошти, запаси, основні засоби, інвестиції тощо.</td>
+</tr>
+<tr class="odd">
+<td>X59 - Cash/Current Liability</td>
+<td>Цей термін відноситься до розподілу зобов’язань компанії на різні категорії або види зобов’язань. Він може вказувати на розмір та склад зобов’язань, такі як короткострокові та довгострокові позики, кредиторська заборгованість, зобов’язання перед акціонерами тощо.</td>
+</tr>
+<tr class="even">
+<td>X60 - Current Liability to Assets</td>
+<td>Цей термін вказує на відношення чистого прибутку компанії до власного капіталу. Він використовується для вимірювання рентабельності капіталу, який вкладено в компанію її власниками.</td>
+</tr>
+<tr class="odd">
+<td>X61 - Operating Funds to Liability</td>
+<td>Цей термін вказує на відношення чистого прибутку компанії до загальних активів. Він використовується для вимірювання ефективності використання активів компанією для генерації прибутку.</td>
+</tr>
+<tr class="even">
+<td>X62 - Inventory/Working Capital</td>
+<td>Це відношення, яке показує, який відсоток витрат на операції становить відношення витрат на операції до власного капіталу компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="odd">
+<td>X63 - Inventory/Current Liability</td>
+<td>Це відношення, яке вказує, який відсоток витрат на дослідження та розвиток становить відношення витрат на дослідження та розвиток до власного капіталу компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="even">
+<td>X64 - Current Liabilities/Liability</td>
+<td>Це відношення, яке показує, скільки разів загальний капітал компанії перевищує власний капітал. Воно обчислюється як відношення загального капіталу до власного капіталу.</td>
+</tr>
+<tr class="odd">
+<td>X65 - Working Capital/Equity</td>
+<td>Це відношення, яке вказує, який відсоток грошових потоків становить відношення грошових потоків до власного капіталу компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="even">
+<td>X66 - Current Liabilities/Equity</td>
+<td>Це відношення, яке вказує, який відсоток витрат на відсотки становить відношення витрат на відсотки до власного капіталу компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="odd">
+<td>X67 - Long-term Liability to Current Assets</td>
+<td>Це показник, який вказує на зростання власного капіталу компанії протягом певного періоду часу.</td>
+</tr>
+<tr class="even">
+<td>X68 - Retained Earnings to Total Assets</td>
+<td>Це показник, який вказує на зростання власного капіталу компанії протягом певного періоду часу.</td>
+</tr>
+<tr class="odd">
+<td>X69 - Total income/Total expense</td>
+<td>Це показник, який вказує на зростання власного капіталу компанії протягом певного періоду часу.</td>
+</tr>
+<tr class="even">
+<td>X70 - Total expense/Assets</td>
+<td>Це показник, який вказує на збільшення капіталу компанії протягом певного періоду часу.</td>
+</tr>
+<tr class="odd">
+<td>X71 - Current Asset Turnover Rate: Current Assets to Sales</td>
+<td>Це відношення, яке вказує, скільки разів поточні активи компанії повертаються за певний період. Воно обчислюється як відношення виручки від продажу до середньої вартості поточних активів.</td>
+</tr>
+<tr class="even">
+<td>X72 - Quick Asset Turnover Rate: Quick Assets to Sales</td>
+<td>Це відношення, яке вказує, скільки разів швидкі активи компанії повертаються за певний період. Воно обчислюється як відношення виручки від продажу до середньої вартості швидких активів.</td>
+</tr>
+<tr class="odd">
+<td>X73 - Working capitcal Turnover Rate: Working Capital to Sales</td>
+<td>Це відношення, яке вказує, скільки разів оборотний капітал компанії повертається за певний період. Воно обчислюється як відношення виручки від продажу до середньої вартості оборотного капіталу.</td>
+</tr>
+<tr class="even">
+<td>X74 - Cash Turnover Rate: Cash to Sales</td>
+<td>Це відношення, яке вказує, скільки разів готівка компанії повертається за певний період. Воно обчислюється як відношення виручки від продажу до середньої вартості готівки.</td>
+</tr>
+<tr class="odd">
+<td>X75 - Cash Flow to Sales</td>
+<td>Це показник, який вказує на суму грошових коштів, яка надійшла від продажу товарів або послуг протягом певного періоду.</td>
+</tr>
+<tr class="even">
+<td>X76 - Fixed Assets to Assets</td>
+<td>Це відношення, яке вказує, який відсоток основних засобів становить відношення основних засобів до загальних активів компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="odd">
+<td>X77 - Current Liability to Liability</td>
+<td>Це відношення, яке вказує, який відсоток поточних зобов’язань становить відношення поточних зобов’язань до загальних зобов’язань компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="even">
+<td>X78 - Current Liability to Equity</td>
+<td>Це відношення, яке вказує, який відсоток поточних зобов’язань становить відношення поточних зобов’язань до власного капіталу компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="odd">
+<td>X79 - Equity to Long-term Liability</td>
+<td>Це відношення, яке вказує, який відсоток власного капіталу становить відношення власного капіталу до довгострокових зобов’язань компанії. Воно виражається у відсотках.</td>
+</tr>
+<tr class="even">
+<td>X80 - Cash Flow to Total Assets</td>
+<td>Це показник, який вказує на суму грошових коштів, яка надійшла від продажу товарів або послуг відносно загальних активів компанії протягом певного періоду.</td>
+</tr>
+<tr class="odd">
+<td>X81 - Cash Flow to Liability</td>
+<td>Це показник, який вказує на відношення суми грошових коштів, що надійшла або покинула компанію, до її зобов’язань протягом певного періоду. Він дозволяє оцінити здатність компанії відповідати своїм фінансовим зобов’язанням.</td>
+</tr>
+<tr class="even">
+<td>X82 - CFO to Assets</td>
+<td>Це показник, який вказує на відношення суми грошових коштів, що надійшла або покинула компанію, до її загальних активів протягом певного періоду. Він допомагає оцінити здатність компанії генерувати грошові кошти зі своїх активів.</td>
+</tr>
+<tr class="odd">
+<td>X83 - Cash Flow to Equity</td>
+<td>Це показник, який вказує на відношення суми грошових коштів, що надійшла або покинула компанію, до її власного капіталу протягом певного періоду. Він дозволяє оцінити ефективність використання власного капіталу компанією.</td>
+</tr>
+<tr class="even">
+<td>X84 - Current Liability to Current Assets</td>
+<td>Це відношення, яке вказує, який відсоток поточних зобов’язань становить відношення поточних зобов’язань до поточних активів компанії. Воно виражається у відсотках і допомагає оцінити фінансову стійкість компанії та її здатність погасити поточні зобов’язання за допомогою поточних активів.</td>
+</tr>
+<tr class="odd">
+<td>X85 - Liability-Assets Flag: 1 if Total Liability exceeds Total Assets, 0 otherwise</td>
+<td>Це бінарний показник, який приймає значення 1, якщо загальні зобов’язання компанії перевищують загальні активи, і 0 - в іншому випадку. Він використовується для визначення фінансового стану компанії та оцінки її здатності покрити зобов’язання за допомогою наявних активів.</td>
+</tr>
+<tr class="even">
+<td>X86 - Net Income to Total Assets</td>
+<td>Це показник, який вказує на відношення прибутку компанії до її загальних активів. Він використовується для вимірювання ефективності використання активів компанією та її прибутковості.</td>
+</tr>
+<tr class="odd">
+<td>X87 - Total assets to GNP price</td>
+<td>Це показник, який вказує, який відсоток загальних активів компанії становить вартість валового внутрішнього продукту (ВВП). Він допомагає визначити масштаби компанії в контексті економіки країни.</td>
+</tr>
+<tr class="even">
+<td>X88 - No-credit Interval</td>
+<td>Це показник, який вказує, наскільки довго компанія може функціонувати без отримання нових кредитів. Він вимірює період, протягом якого компанія може використовувати наявні ресурси (грошові кошти, запаси тощо) для покриття своїх зобов’язань без додаткового фінансування.</td>
+</tr>
+<tr class="odd">
+<td>X89 - Gross Profit to Sales</td>
+<td>Це показник, який вказує, який відсоток валового прибутку компанії становить її загальний обсяг продажу. Він використовується для оцінки прибутковості компанії та її здатності генерувати прибуток від продажу товарів чи послуг.</td>
+</tr>
+<tr class="even">
+<td>X90 - Net Income to Stockholder’s Equity</td>
+<td>Це показник, який вказує на відношення прибутку після сплати податків компанії до її власного капіталу. Він використовується для оцінки рентабельності вкладеного в капітал компанії.</td>
+</tr>
+<tr class="odd">
+<td>X91 - Liability to Equity</td>
+<td>Це відношення, яке вказує, який відсоток зобов’язань компанії становить її власний капітал. Воно використовується для оцінки фінансової стійкості компанії та ризику, пов’язаного з її зобов’язаннями.</td>
+</tr>
+<tr class="even">
+<td>X92 - Degree of Financial Leverage (DFL)</td>
+<td>Це показник, який вказує, як змінюється прибуток компанії внаслідок зміни її фінансового забезпечення або використання боргових засобів. Він вимірює чутливість прибутку компанії до змін у фінансових умовах.</td>
+</tr>
+<tr class="odd">
+<td>X93 - Interest Coverage Ratio (Interest expense to EBIT)</td>
+<td>Це показник, який вказує, наскільки здатна компанія покрити свої витрати на відсотки за рахунок свого прибутку перед оподаткуванням. Він використовується для оцінки фінансової стійкості компанії та її здатності погашати відсоткові платежі.</td>
+</tr>
+<tr class="even">
+<td>X94 - Net Income Flag: 1 if Net Income is Negative for the last two years, 0 otherwise</td>
+<td>Це бінарний показник, який приймає значення 1, якщо чистий прибуток компанії був негативним протягом останніх двох періодів, і 0 - якщо чистий прибуток був позитивним. Він використовується для визначення фінансової стійкості компанії та оцінки її прибутковості.</td>
+</tr>
+<tr class="odd">
+<td>X95 - Equity to Liability</td>
+<td>Це відношення використовується для оцінки фінансової стійкості компанії та вказує на те, яка частина зобов’язань компанії фінансується з її власного капіталу. Воно вимірює відносну величину власного капіталу компанії в порівнянні з її зобов’язаннями і може служити показником ризику та фінансової стабільності.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="побудова-млр-за-мнк" class="level1">
+<h1>Побудова МЛР за МНК</h1>
+<p>У цьому розділі я розповім як створюється ПЛР/МЛР за методом найменших квадратів, які формули використовуються для розрахунку, та як мова програмування R полегшує роботу, проводячи всі розрахунки однією нескладною функцією. ## Метод найменших квадратів по кроково</p>
+<p>Рівняння прямої виглядає наступним чином:</p>
+<p><span class="math display">\[
+y_i= \beta_0 + \beta_1x_i + u_i
+\]</span></p>
+<p>Підставимо конкретні змінні у рівняння, отримаємо:</p>
+<p><span class="math display">\[
+length_i = \beta_0 + \beta_1dose + u_i
+\]</span></p>
+<p>Для оцінювання параметрів моделі в лінійній регресії пропонується використовувати метод найменших квадратів. Подивимось, як працює мінімізація суми квадратів залишків. <span class="math display">\[
+\sum\limits^{n}_{i=1}{u_i^2} = \sum\limits^{n}_{i=1}(y_i - \hat{\beta_0} - \hat{\beta_1}x_i)^2 \rightarrow min
+\]</span> Візьмемо похідні по <span class="math inline">\(\hat{\beta_0}\)</span> та <span class="math inline">\(\hat{\beta_1}\)</span>: <span class="math display">\[
+\left\{\begin{matrix}
+-2\sum\limits^{n}_{i=1}(y_i - \hat{\beta_0} - \hat{\beta_1}x_i) = 0 &amp; \\
+-2\sum\limits^{n}_{i=1}x_i(y_i - \hat{\beta_0} - \hat{\beta_1}x_i) = 0 &amp;
+\end{matrix}\right.
+\]</span> Розкриємо дужки першого рівняння: <span class="math display">\[
+\left\{\begin{matrix}
+\sum\limits^{n}_{i=1}y_i - n\hat{\beta_0} - \hat{\beta_1}x_i = 0 &amp; \\
+\sum\limits^{n}_{i=1}x_i(y_i - \hat{\beta_0} - \hat{\beta_1}x_i) = 0 &amp;
+\end{matrix}\right.
+\]</span></p>
+<p>Поділимо перше рівняння на <span class="math inline">\(n\)</span>: <span class="math display">\[
+\left\{\begin{matrix}
+\overline{y} - \hat{\beta_0} - \hat{\beta_1}\overline{x} = 0 &amp; \\
+\sum\limits^{n}_{i=1}x_i(y_i - \hat{\beta_0} - \hat{\beta_1}x_i) = 0 &amp;
+\end{matrix}\right.
+\]</span> З першого рівняння виразимо <span class="math inline">\(\hat{\beta_0}\)</span> і підставимо у друге: <span class="math display">\[
+\left\{\begin{matrix}
+\hat{\beta_0} = \overline{y} - \hat{\beta_1}\overline{x} &amp; \\
+\sum\limits^{n}_{i=1}x_i(y_i - (\overline{y} - \hat{\beta_1}\overline{x}) - \hat{\beta_1}x_i) = 0 &amp;
+\end{matrix}\right.
+\]</span> Розкриємо дужки у другому рівнянні: <span class="math display">\[
+\left\{\begin{matrix}
+\hat{\beta_0} = \overline{y} - \hat{\beta_1}\overline{x} &amp; \\
+\sum\limits^{n}_{i=1}x_i(y_i - \overline{y}) =  \hat{\beta_1}\sum\limits^{n}_{i=1}x_i(x_i - \overline{x})
+\end{matrix}\right.
+\]</span> Оскільки <span class="math display">\[\sum\limits^{n}_{i=1}x_i(y_i - \overline{y}) = \sum\limits^{n}_{i=1}(x_i - \overline{x})^2\]</span> та <span class="math display">\[\sum\limits^{n}_{i=1}x_i(y_i - \overline{y}) = \sum\limits^{n}_{i=1}(x_i - \overline{x})(y_i - \overline{y}),\]</span> тоді за умови <span class="math display">\[
+\sum\limits^{n}_{i=1}(x_i - \overline{x})^2 &gt; 0
+\]</span> оцінки параметрів моделі <span class="math inline">\(\hat{\beta_0}\)</span> та <span class="math inline">\(\hat{\beta_1}\)</span> будуть дорівнювати:</p>
+<p><span class="math display">\[
+\left\{\begin{matrix}
+\hat{\beta_0} = \overline{y} - \hat{\beta_1}\overline{x} &amp; \\
+\hat{\beta_1} = \frac{\sum\limits^{n}_{i=1}(x_i - \overline{x})(y_i -    \overline{y})}{\sum\limits^{n}_{i=1}(x_i - \overline{x})^2} =  \frac{\overline{xy} - \overline{x}\overline{y}}{\overline{x^2} -   \overline{x}^2}
+\end{matrix}\right.
+\]</span> Тепер розрахуємо по-етапно <span class="math inline">\(\hat{\beta_0}\)</span> та <span class="math inline">\(\hat{\beta_1}\)</span>. Додамо розрахункові значення <span class="math inline">\(dose^2\)</span> та <span class="math inline">\(dose*length\)</span></p>
+<p>Проте мова програмування R надає нам чудову функцію lm(), яка дозваляє уникнути створення моделі за МНК по кроково, а функція summary() виводить додаткову інформаю про модель, у тому числі оцінку коефіцієнтів</p>
+<section id="підготовка-вибірки" class="level2">
+<h2 class="anchored" data-anchor-id="підготовка-вибірки">Підготовка вибірки</h2>
+<p>Спочатку треба визначити залежні та незалежні змінні. Залежна змінна, яку ми пояснюємо або прогнозуємо, є “Bankrupt.”, тому можна вважати, що вона є залежною, а всі інші змінні є незалежними. Далі, потрібно сформувати підвибірку, що включатиме дані про рівень людського розвитку та всі інші незалежні змінні. Це можна зробити за допомогою функції “slice_sample(n = …)”, яка дозволяє отримати випадкову підвибірку даних.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>MLR <span class="ot">&lt;-</span> data </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>MLR</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6,819 × 96
+   Bankrupt. ROA.C..before.interest.and.depreciation.be…¹ ROA.A..before.intere…²
+       &lt;dbl&gt;                                        &lt;dbl&gt;                  &lt;dbl&gt;
+ 1         1                                        0.371                  0.424
+ 2         1                                        0.464                  0.538
+ 3         1                                        0.426                  0.499
+ 4         1                                        0.400                  0.451
+ 5         1                                        0.465                  0.538
+ 6         1                                        0.389                  0.415
+ 7         0                                        0.391                  0.446
+ 8         0                                        0.508                  0.571
+ 9         0                                        0.489                  0.545
+10         0                                        0.496                  0.551
+# ℹ 6,809 more rows
+# ℹ abbreviated names:
+#   ¹​ROA.C..before.interest.and.depreciation.before.interest,
+#   ²​ROA.A..before.interest.and...after.tax
+# ℹ 93 more variables: ROA.B..before.interest.and.depreciation.after.tax &lt;dbl&gt;,
+#   Operating.Gross.Margin &lt;dbl&gt;, Realized.Sales.Gross.Margin &lt;dbl&gt;,
+#   Operating.Profit.Rate &lt;dbl&gt;, Pre.tax.net.Interest.Rate &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="пошук-найкращої-млр" class="level2">
+<h2 class="anchored" data-anchor-id="пошук-найкращої-млр">Пошук найкращої МЛР</h2>
+<p><strong>’Множинна лінійна регресія`</strong> - це статистичний метод, який дозволяє визначити взаємозв’язок між однією залежною змінною і двома або більше незалежними змінними. ### Модель зі всіма змінними Розглянемо залежність між Bankrupt.(залежна зміна) та всіма незалежними</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>MLR_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Bankrupt.</span><span class="st">`</span><span class="sc">~</span> .,  <span class="at">data =</span> MLR) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(MLR_lm)</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Bankrupt. ~ ., data = MLR)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.94256 -0.04984 -0.01435  0.01257  1.00329 
+
+Coefficients: (5 not defined because of singularities)
+                                                          Estimate Std. Error
+(Intercept)                                              1.231e+04  1.599e+04
+ROA.C..before.interest.and.depreciation.before.interest  9.979e-01  2.635e-01
+ROA.A..before.interest.and...after.tax                   1.504e+00  1.941e-01
+ROA.B..before.interest.and.depreciation.after.tax       -1.554e+00  3.167e-01
+Operating.Gross.Margin                                  -2.931e+01  9.326e+02
+Realized.Sales.Gross.Margin                             -9.742e-01  3.730e+00
+Operating.Profit.Rate                                   -2.576e+04  3.346e+04
+Pre.tax.net.Interest.Rate                                2.153e+04  2.794e+04
+After.tax.net.Interest.Rate                             -1.090e+01  6.037e+00
+Non.industry.income.and.expenditure.revenue             -1.231e+04  1.599e+04
+Continuous.interest.rate..after.tax.                    -3.976e+00  2.789e+00
+Operating.Expense.Rate                                   7.378e-13  6.671e-13
+Research.and.development.expense.rate                    7.804e-13  7.736e-13
+Cash.flow.rate                                          -1.015e-01  3.114e-01
+Interest.bearing.debt.interest.rate                      1.735e-11  1.814e-11
+Tax.rate..A.                                            -6.871e-02  1.599e-02
+Net.Value.Per.Share..B.                                 -5.683e-01  1.611e+00
+Net.Value.Per.Share..A.                                 -7.679e+00  3.594e+00
+Net.Value.Per.Share..C.                                  8.225e+00  3.212e+00
+Persistent.EPS.in.the.Last.Four.Seasons                 -2.658e-01  3.275e-01
+Cash.Flow.Per.Share                                      1.464e-01  2.249e-01
+Revenue.Per.Share..Yuan...                              -1.401e-10  7.782e-11
+Operating.Profit.Per.Share..Yuan...                     -1.030e+00  1.739e+00
+Per.Share.Net.profit.before.tax..Yuan...                 7.361e-02  2.702e-01
+Realized.Sales.Gross.Profit.Growth.Rate                  1.362e-01  1.623e-01
+Operating.Profit.Growth.Rate                            -4.351e-02  2.487e-01
+After.tax.Net.Profit.Growth.Rate                        -1.312e+00  1.604e+00
+Regular.Net.Profit.Growth.Rate                           1.401e+00  1.593e+00
+Continuous.Net.Profit.Growth.Rate                        5.463e-02  1.933e-01
+Total.Asset.Growth.Rate                                 -5.956e-13  7.041e-13
+Net.Value.Growth.Rate                                    2.835e-11  1.945e-11
+Total.Asset.Return.Growth.Rate.Ratio                     1.000e-01  2.699e-01
+Cash.Reinvestment..                                     -3.355e-02  1.795e-01
+Current.Ratio                                           -5.706e-11  6.735e-11
+Quick.Ratio                                              2.830e-12  8.092e-12
+Interest.Expense.Ratio                                  -8.752e-02  1.719e-01
+Total.debt.Total.net.worth                              -6.488e-12  1.432e-11
+Debt.ratio..                                             7.749e-01  1.890e-01
+Net.worth.Assets                                                NA         NA
+Long.term.fund.suitability.ratio..A.                     7.130e-02  8.288e-02
+Borrowing.dependency                                     2.070e+00  7.229e-01
+Contingent.liabilities.Net.worth                        -2.502e+00  4.961e-01
+Operating.profit.Paid.in.capital                         1.860e+00  1.750e+00
+Net.profit.before.tax.Paid.in.capital                   -7.668e-01  3.428e-01
+Inventory.and.accounts.receivable.Net.value             -2.511e+00  8.699e-01
+Total.Asset.Turnover                                    -8.328e-02  4.669e-02
+Accounts.Receivable.Turnover                            -1.051e-11  8.665e-12
+Average.Collection.Days                                 -3.923e-12  8.580e-12
+Inventory.Turnover.Rate..times.                         -1.074e-12  6.325e-13
+Fixed.Assets.Turnover.Frequency                          2.453e-12  9.001e-13
+Net.Worth.Turnover.Rate..times.                         -1.566e-01  1.337e-01
+Revenue.per.person                                       6.919e-11  2.573e-11
+Operating.profit.per.person                             -2.472e-01  7.437e-02
+Allocation.rate.per.person                              -3.635e-12  7.008e-12
+Working.Capital.to.Total.Assets                          4.383e-01  2.382e-01
+Quick.Assets.Total.Assets                               -3.150e-02  2.102e-02
+Current.Assets.Total.Assets                             -1.981e-02  6.829e-02
+Cash.Total.Assets                                       -3.524e-02  2.446e-02
+Quick.Assets.Current.Liability                          -2.140e-12  1.255e-11
+Cash.Current.Liability                                   1.535e-11  3.891e-12
+Current.Liability.to.Assets                                     NA         NA
+Operating.Funds.to.Liability                             3.633e-01  1.608e-01
+Inventory.Working.Capital                                6.266e-02  1.918e-01
+Inventory.Current.Liability                             -3.480e-12  3.424e-12
+Current.Liabilities.Liability                            6.830e-02  2.733e-02
+Working.Capital.Equity                                  -1.510e+00  1.080e+00
+Current.Liabilities.Equity                              -8.922e-01  2.438e+00
+Long.term.Liability.to.Current.Assets                    2.702e-12  3.422e-12
+Retained.Earnings.to.Total.Assets                        1.026e+00  1.467e-01
+Total.income.Total.expense                               2.638e-02  1.843e-01
+Total.expense.Assets                                     8.679e-02  1.307e-01
+Current.Asset.Turnover.Rate                              7.739e-13  8.395e-13
+Quick.Asset.Turnover.Rate                                1.450e-13  6.840e-13
+Working.capitcal.Turnover.Rate                           3.328e+00  1.999e+00
+Cash.Turnover.Rate                                      -1.954e-12  7.024e-13
+Cash.Flow.to.Sales                                       2.364e-01  1.062e+00
+Fixed.Assets.to.Assets                                   9.460e-11  2.105e-11
+Current.Liability.to.Liability                                  NA         NA
+Current.Liability.to.Equity                                     NA         NA
+Equity.to.Long.term.Liability                           -2.663e-01  6.631e-01
+Cash.Flow.to.Total.Assets                                1.546e-01  8.791e-02
+Cash.Flow.to.Liability                                  -1.934e-01  1.079e-01
+CFO.to.Assets                                           -3.269e-02  8.989e-02
+Cash.Flow.to.Equity                                     -8.275e-01  2.732e-01
+Current.Liability.to.Current.Assets                      2.780e-01  1.101e-01
+Liability.Assets.Flag                                    5.608e-01  8.429e-02
+Net.Income.to.Total.Assets                              -2.831e+00  2.584e-01
+Total.assets.to.GNP.price                                8.835e-12  5.339e-12
+No.credit.Interval                                       4.050e-02  1.578e-01
+Gross.Profit.to.Sales                                    3.028e+01  9.325e+02
+Net.Income.to.Stockholder.s.Equity                       1.617e+00  3.939e-01
+Liability.to.Equity                                      3.272e+00  2.885e+00
+Degree.of.Financial.Leverage..DFL.                       2.702e-02  1.230e-01
+Interest.Coverage.Ratio..Interest.expense.to.EBIT.      -3.977e-02  1.461e-01
+Net.Income.Flag                                                 NA         NA
+Equity.to.Liability                                      1.189e-01  6.826e-02
+                                                        t value Pr(&gt;|t|)    
+(Intercept)                                               0.770 0.441423    
+ROA.C..before.interest.and.depreciation.before.interest   3.787 0.000154 ***
+ROA.A..before.interest.and...after.tax                    7.749 1.06e-14 ***
+ROA.B..before.interest.and.depreciation.after.tax        -4.905 9.56e-07 ***
+Operating.Gross.Margin                                   -0.031 0.974926    
+Realized.Sales.Gross.Margin                              -0.261 0.793945    
+Operating.Profit.Rate                                    -0.770 0.441347    
+Pre.tax.net.Interest.Rate                                 0.771 0.441024    
+After.tax.net.Interest.Rate                              -1.806 0.071000 .  
+Non.industry.income.and.expenditure.revenue              -0.770 0.441331    
+Continuous.interest.rate..after.tax.                     -1.425 0.154108    
+Operating.Expense.Rate                                    1.106 0.268809    
+Research.and.development.expense.rate                     1.009 0.313146    
+Cash.flow.rate                                           -0.326 0.744369    
+Interest.bearing.debt.interest.rate                       0.956 0.338949    
+Tax.rate..A.                                             -4.298 1.75e-05 ***
+Net.Value.Per.Share..B.                                  -0.353 0.724246    
+Net.Value.Per.Share..A.                                  -2.137 0.032638 *  
+Net.Value.Per.Share..C.                                   2.561 0.010470 *  
+Persistent.EPS.in.the.Last.Four.Seasons                  -0.812 0.417063    
+Cash.Flow.Per.Share                                       0.651 0.514979    
+Revenue.Per.Share..Yuan...                               -1.800 0.071848 .  
+Operating.Profit.Per.Share..Yuan...                      -0.592 0.553646    
+Per.Share.Net.profit.before.tax..Yuan...                  0.272 0.785276    
+Realized.Sales.Gross.Profit.Growth.Rate                   0.839 0.401389    
+Operating.Profit.Growth.Rate                             -0.175 0.861111    
+After.tax.Net.Profit.Growth.Rate                         -0.818 0.413442    
+Regular.Net.Profit.Growth.Rate                            0.879 0.379272    
+Continuous.Net.Profit.Growth.Rate                         0.283 0.777511    
+Total.Asset.Growth.Rate                                  -0.846 0.397640    
+Net.Value.Growth.Rate                                     1.458 0.144857    
+Total.Asset.Return.Growth.Rate.Ratio                      0.371 0.710912    
+Cash.Reinvestment..                                      -0.187 0.851750    
+Current.Ratio                                            -0.847 0.396906    
+Quick.Ratio                                               0.350 0.726523    
+Interest.Expense.Ratio                                   -0.509 0.610617    
+Total.debt.Total.net.worth                               -0.453 0.650610    
+Debt.ratio..                                              4.100 4.19e-05 ***
+Net.worth.Assets                                             NA       NA    
+Long.term.fund.suitability.ratio..A.                      0.860 0.389632    
+Borrowing.dependency                                      2.864 0.004202 ** 
+Contingent.liabilities.Net.worth                         -5.043 4.71e-07 ***
+Operating.profit.Paid.in.capital                          1.063 0.287738    
+Net.profit.before.tax.Paid.in.capital                    -2.237 0.025314 *  
+Inventory.and.accounts.receivable.Net.value              -2.886 0.003914 ** 
+Total.Asset.Turnover                                     -1.784 0.074481 .  
+Accounts.Receivable.Turnover                             -1.213 0.225155    
+Average.Collection.Days                                  -0.457 0.647547    
+Inventory.Turnover.Rate..times.                          -1.698 0.089483 .  
+Fixed.Assets.Turnover.Frequency                           2.725 0.006441 ** 
+Net.Worth.Turnover.Rate..times.                          -1.171 0.241587    
+Revenue.per.person                                        2.689 0.007194 ** 
+Operating.profit.per.person                              -3.324 0.000892 ***
+Allocation.rate.per.person                               -0.519 0.604021    
+Working.Capital.to.Total.Assets                           1.840 0.065763 .  
+Quick.Assets.Total.Assets                                -1.498 0.134056    
+Current.Assets.Total.Assets                              -0.290 0.771775    
+Cash.Total.Assets                                        -1.441 0.149643    
+Quick.Assets.Current.Liability                           -0.171 0.864607    
+Cash.Current.Liability                                    3.947 8.01e-05 ***
+Current.Liability.to.Assets                                  NA       NA    
+Operating.Funds.to.Liability                              2.259 0.023900 *  
+Inventory.Working.Capital                                 0.327 0.743875    
+Inventory.Current.Liability                              -1.016 0.309527    
+Current.Liabilities.Liability                             2.499 0.012478 *  
+Working.Capital.Equity                                   -1.398 0.162164    
+Current.Liabilities.Equity                               -0.366 0.714346    
+Long.term.Liability.to.Current.Assets                     0.790 0.429688    
+Retained.Earnings.to.Total.Assets                         6.993 2.95e-12 ***
+Total.income.Total.expense                                0.143 0.886158    
+Total.expense.Assets                                      0.664 0.506654    
+Current.Asset.Turnover.Rate                               0.922 0.356635    
+Quick.Asset.Turnover.Rate                                 0.212 0.832155    
+Working.capitcal.Turnover.Rate                            1.665 0.095927 .  
+Cash.Turnover.Rate                                       -2.782 0.005420 ** 
+Cash.Flow.to.Sales                                        0.223 0.823895    
+Fixed.Assets.to.Assets                                    4.493 7.13e-06 ***
+Current.Liability.to.Liability                               NA       NA    
+Current.Liability.to.Equity                                  NA       NA    
+Equity.to.Long.term.Liability                            -0.402 0.688037    
+Cash.Flow.to.Total.Assets                                 1.758 0.078728 .  
+Cash.Flow.to.Liability                                   -1.792 0.073100 .  
+CFO.to.Assets                                            -0.364 0.716104    
+Cash.Flow.to.Equity                                      -3.029 0.002466 ** 
+Current.Liability.to.Current.Assets                       2.525 0.011607 *  
+Liability.Assets.Flag                                     6.653 3.10e-11 ***
+Net.Income.to.Total.Assets                              -10.957  &lt; 2e-16 ***
+Total.assets.to.GNP.price                                 1.655 0.097969 .  
+No.credit.Interval                                        0.257 0.797425    
+Gross.Profit.to.Sales                                     0.032 0.974094    
+Net.Income.to.Stockholder.s.Equity                        4.104 4.10e-05 ***
+Liability.to.Equity                                       1.134 0.256687    
+Degree.of.Financial.Leverage..DFL.                        0.220 0.826195    
+Interest.Coverage.Ratio..Interest.expense.to.EBIT.       -0.272 0.785432    
+Net.Income.Flag                                              NA       NA    
+Equity.to.Liability                                       1.741 0.081642 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1588 on 6728 degrees of freedom
+Multiple R-squared:  0.2033,    Adjusted R-squared:  0.1926 
+F-statistic: 19.07 on 90 and 6728 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Функція <strong>summary()</strong> надає детальний аналіз, де крім оцінки коефіцієнтів, вона виводить також стандартну похибку, t-критерій, коефіцієнт детермінації та скоригов Поговоримо про кожен окремо на прикладі моделі MLR_lm:</p>
+<p><strong>t-критерій</strong>- тест, який використовується у статистиці для перевірки гіпотез про значимість різниці між середніми значеннями двох груп. T-критерій базується на розподілі Стьюдента, що залежить від ступенів свободи (degrees of freedom) і рівня значимості.</p>
+<p>Для початку застосовуємо функцію <strong>qt()</strong>, що повертає критичне значення (квантиль) t-розподілу.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="fu">qt</span>(<span class="fl">0.05</span>,  <span class="dv">909</span>))</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.646532</code></pre>
+</div>
+</div>
+<p>Робимо висновок, що коефіцієнти <strong>ROA(A) before interest and % after tax, Persistent EPS in the Last Four Seasons, After-tax Net Profit Growth Rate, Regular Net Profit Growth Rate, Total Asset Return Growth Rate Ratio, Interest Expense Ratio, Borrowing dependency, Working Capital/Equity, Quick Asset Turnover Rate, Liability-Assets Flag, Total assets to GNP price, Net Income to Stockholder’s Equity, Interest Coverage Ratio (Interest expense to EBIT), Equity to Liability</strong> мають значення t-критерію, модуль якого більший за 1.646532, що дозволяє прийняти гіпотезу про їхню значущість;</p>
+<p><strong>F-критерій</strong> є статистичним критерієм, який використовується для порівняння дисперсії між двома або більше вибірками. В контексті лінійної регресії F-критерій дозволяє оцінити важливість регресійної моделі в цілому. Значення f-статистики, яке дорівнює 19.07, свідчить про наявність слабких статистично значущих зв’язків між змінними.</p>
+<p><strong>P-значення</strong> вказує на ймовірність отримати спостережуване значення статистики, якщо нульова гіпотеза є правильною. Дуже мале значення p-value: &lt; 2.2e-16 свідчить про наявність статистично значущого зв’язку між змінними в моделі.</p>
+<p><strong>Коефіцієнт детермінації</strong> вказує на частку варіації залежної змінної, яку можна пояснити регресійною моделлю. Однак, цей показник має ваду, оскільки його значення збільшується зі збільшенням кількості вибірок та змінних. Функція <strong>summary()</strong> також надає скоригований коефіцієнт детермінації, який є модифікованою версією і враховує цю проблему. Проте навіть Adjusted R-squared не може гарантувати точність показників, тому необхідно також оцінювати статистичну значущість змінних, навіть якщо R^2 = 99%. У даній моделі скоригований коефіцієнт детермінації має значення 19,2%.</p>
+<p><strong>Довірчі інтервали</strong> - це інтервали значень, що містять обраний параметр з певною ймовірністю.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(MLR_lm)</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                2.5 %
+(Intercept)                                             -1.904005e+04
+ROA.C..before.interest.and.depreciation.before.interest  4.813302e-01
+ROA.A..before.interest.and...after.tax                   1.123775e+00
+ROA.B..before.interest.and.depreciation.after.tax       -2.174486e+00
+Operating.Gross.Margin                                  -1.857466e+03
+Realized.Sales.Gross.Margin                             -8.285611e+00
+Operating.Profit.Rate                                   -9.134167e+04
+Pre.tax.net.Interest.Rate                               -3.324661e+04
+After.tax.net.Interest.Rate                             -2.273660e+01
+Non.industry.income.and.expenditure.revenue             -4.366749e+04
+Continuous.interest.rate..after.tax.                    -9.444065e+00
+Operating.Expense.Rate                                  -5.699874e-13
+Research.and.development.expense.rate                   -7.361697e-13
+Cash.flow.rate                                          -7.119706e-01
+Interest.bearing.debt.interest.rate                     -1.821048e-11
+Tax.rate..A.                                            -1.000457e-01
+Net.Value.Per.Share..B.                                 -3.726229e+00
+Net.Value.Per.Share..A.                                 -1.472376e+01
+Net.Value.Per.Share..C.                                  1.928144e+00
+Persistent.EPS.in.the.Last.Four.Seasons                 -9.076646e-01
+Cash.Flow.Per.Share                                     -2.944185e-01
+Revenue.Per.Share..Yuan...                              -2.926604e-10
+Operating.Profit.Per.Share..Yuan...                     -4.438200e+00
+Per.Share.Net.profit.before.tax..Yuan...                -4.559949e-01
+Realized.Sales.Gross.Profit.Growth.Rate                 -1.819872e-01
+Operating.Profit.Growth.Rate                            -5.309842e-01
+After.tax.Net.Profit.Growth.Rate                        -4.457250e+00
+Regular.Net.Profit.Growth.Rate                          -1.721936e+00
+Continuous.Net.Profit.Growth.Rate                       -3.243670e-01
+Total.Asset.Growth.Rate                                 -1.975941e-12
+Net.Value.Growth.Rate                                   -9.765881e-12
+Total.Asset.Return.Growth.Rate.Ratio                    -4.289751e-01
+Cash.Reinvestment..                                     -3.854073e-01
+Current.Ratio                                           -1.890944e-10
+Quick.Ratio                                             -1.303201e-11
+Interest.Expense.Ratio                                  -4.244533e-01
+Total.debt.Total.net.worth                              -3.456824e-11
+Debt.ratio..                                             4.043771e-01
+Net.worth.Assets                                                   NA
+Long.term.fund.suitability.ratio..A.                    -9.116196e-02
+Borrowing.dependency                                     6.529125e-01
+Contingent.liabilities.Net.worth                        -3.474023e+00
+Operating.profit.Paid.in.capital                        -1.569627e+00
+Net.profit.before.tax.Paid.in.capital                   -1.438679e+00
+Inventory.and.accounts.receivable.Net.value             -4.215914e+00
+Total.Asset.Turnover                                    -1.748030e-01
+Accounts.Receivable.Turnover                            -2.749589e-11
+Average.Collection.Days                                 -2.074309e-11
+Inventory.Turnover.Rate..times.                         -2.314213e-12
+Fixed.Assets.Turnover.Frequency                          6.885520e-13
+Net.Worth.Turnover.Rate..times.                         -4.187908e-01
+Revenue.per.person                                       1.873994e-11
+Operating.profit.per.person                             -3.930092e-01
+Allocation.rate.per.person                              -1.737202e-11
+Working.Capital.to.Total.Assets                         -2.857702e-02
+Quick.Assets.Total.Assets                               -7.270901e-02
+Current.Assets.Total.Assets                             -1.536820e-01
+Cash.Total.Assets                                       -8.319008e-02
+Quick.Assets.Current.Liability                          -2.674369e-11
+Cash.Current.Liability                                   7.728047e-12
+Current.Liability.to.Assets                                        NA
+Operating.Funds.to.Liability                             4.807271e-02
+Inventory.Working.Capital                               -3.132869e-01
+Inventory.Current.Liability                             -1.019270e-11
+Current.Liabilities.Liability                            1.472343e-02
+Working.Capital.Equity                                  -3.627896e+00
+Current.Liabilities.Equity                              -5.670593e+00
+Long.term.Liability.to.Current.Assets                   -4.005300e-12
+Retained.Earnings.to.Total.Assets                        7.382353e-01
+Total.income.Total.expense                              -3.348151e-01
+Total.expense.Assets                                    -1.693969e-01
+Current.Asset.Turnover.Rate                             -8.717635e-13
+Quick.Asset.Turnover.Rate                               -1.195802e-12
+Working.capitcal.Turnover.Rate                          -5.899705e-01
+Cash.Turnover.Rate                                      -3.330831e-12
+Cash.Flow.to.Sales                                      -1.845916e+00
+Fixed.Assets.to.Assets                                   5.332671e-11
+Current.Liability.to.Liability                                     NA
+Current.Liability.to.Equity                                        NA
+Equity.to.Long.term.Liability                           -1.566204e+00
+Cash.Flow.to.Total.Assets                               -1.775209e-02
+Cash.Flow.to.Liability                                  -4.049716e-01
+CFO.to.Assets                                           -2.089159e-01
+Cash.Flow.to.Equity                                     -1.363057e+00
+Current.Liability.to.Current.Assets                      6.212544e-02
+Liability.Assets.Flag                                    3.955250e-01
+Net.Income.to.Total.Assets                              -3.337856e+00
+Total.assets.to.GNP.price                               -1.629899e-12
+No.credit.Interval                                      -2.687707e-01
+Gross.Profit.to.Sales                                   -1.797804e+03
+Net.Income.to.Stockholder.s.Equity                       8.446127e-01
+Liability.to.Equity                                     -2.382564e+00
+Degree.of.Financial.Leverage..DFL.                      -2.141752e-01
+Interest.Coverage.Ratio..Interest.expense.to.EBIT.      -3.261062e-01
+Net.Income.Flag                                                    NA
+Equity.to.Liability                                     -1.493568e-02
+                                                               97.5 %
+(Intercept)                                              4.366499e+04
+ROA.C..before.interest.and.depreciation.before.interest  1.514530e+00
+ROA.A..before.interest.and...after.tax                   1.884903e+00
+ROA.B..before.interest.and.depreciation.after.tax       -9.327047e-01
+Operating.Gross.Margin                                   1.798840e+03
+Realized.Sales.Gross.Margin                              6.337201e+00
+Operating.Profit.Rate                                    3.982324e+04
+Pre.tax.net.Interest.Rate                                7.630719e+04
+After.tax.net.Interest.Rate                              9.330897e-01
+Non.industry.income.and.expenditure.revenue              1.903756e+04
+Continuous.interest.rate..after.tax.                     1.492310e+00
+Operating.Expense.Rate                                   2.045498e-12
+Research.and.development.expense.rate                    2.296887e-12
+Cash.flow.rate                                           5.088884e-01
+Interest.bearing.debt.interest.rate                      5.290139e-11
+Tax.rate..A.                                            -3.736769e-02
+Net.Value.Per.Share..B.                                  2.589557e+00
+Net.Value.Per.Share..A.                                 -6.347561e-01
+Net.Value.Per.Share..C.                                  1.452104e+01
+Persistent.EPS.in.the.Last.Four.Seasons                  3.761579e-01
+Cash.Flow.Per.Share                                      5.872855e-01
+Revenue.Per.Share..Yuan...                               1.244795e-11
+Operating.Profit.Per.Share..Yuan...                      2.378456e+00
+Per.Share.Net.profit.before.tax..Yuan...                 6.032125e-01
+Realized.Sales.Gross.Profit.Growth.Rate                  4.544340e-01
+Operating.Profit.Growth.Rate                             4.439658e-01
+After.tax.Net.Profit.Growth.Rate                         1.832838e+00
+Regular.Net.Profit.Growth.Rate                           4.523167e+00
+Continuous.Net.Profit.Growth.Rate                        4.336311e-01
+Total.Asset.Growth.Rate                                  7.846964e-13
+Net.Value.Growth.Rate                                    6.647426e-11
+Total.Asset.Return.Growth.Rate.Ratio                     6.290147e-01
+Cash.Reinvestment..                                      3.183157e-01
+Current.Ratio                                            7.497028e-11
+Quick.Ratio                                              1.869245e-11
+Interest.Expense.Ratio                                   2.494090e-01
+Total.debt.Total.net.worth                               2.159224e-11
+Debt.ratio..                                             1.145484e+00
+Net.worth.Assets                                                   NA
+Long.term.fund.suitability.ratio..A.                     2.337655e-01
+Borrowing.dependency                                     3.487001e+00
+Contingent.liabilities.Net.worth                        -1.529148e+00
+Operating.profit.Paid.in.capital                         5.289905e+00
+Net.profit.before.tax.Paid.in.capital                   -9.486232e-02
+Inventory.and.accounts.receivable.Net.value             -8.053063e-01
+Total.Asset.Turnover                                     8.235129e-03
+Accounts.Receivable.Turnover                             6.474788e-12
+Average.Collection.Days                                  1.289733e-11
+Inventory.Turnover.Rate..times.                          1.656848e-13
+Fixed.Assets.Turnover.Frequency                          4.217550e-12
+Net.Worth.Turnover.Rate..times.                          1.055430e-01
+Revenue.per.person                                       1.196307e-10
+Operating.profit.per.person                             -1.014277e-01
+Allocation.rate.per.person                               1.010284e-11
+Working.Capital.to.Total.Assets                          9.052148e-01
+Quick.Assets.Total.Assets                                9.708547e-03
+Current.Assets.Total.Assets                              1.140640e-01
+Cash.Total.Assets                                        1.270275e-02
+Quick.Assets.Current.Liability                           2.246337e-11
+Cash.Current.Liability                                   2.298166e-11
+Current.Liability.to.Assets                                        NA
+Operating.Funds.to.Liability                             6.785915e-01
+Inventory.Working.Capital                                4.386112e-01
+Inventory.Current.Liability                              3.232588e-12
+Current.Liabilities.Liability                            1.218830e-01
+Working.Capital.Equity                                   6.074739e-01
+Current.Liabilities.Equity                               3.886114e+00
+Long.term.Liability.to.Current.Assets                    9.410108e-12
+Retained.Earnings.to.Total.Assets                        1.313372e+00
+Total.income.Total.expense                               3.875754e-01
+Total.expense.Assets                                     3.429707e-01
+Current.Asset.Turnover.Rate                              2.419527e-12
+Quick.Asset.Turnover.Rate                                1.485726e-12
+Working.capitcal.Turnover.Rate                           7.246787e+00
+Cash.Turnover.Rate                                      -5.770193e-13
+Cash.Flow.to.Sales                                       2.318708e+00
+Fixed.Assets.to.Assets                                   1.358719e-10
+Current.Liability.to.Liability                                     NA
+Current.Liability.to.Equity                                        NA
+Equity.to.Long.term.Liability                            1.033665e+00
+Cash.Flow.to.Total.Assets                                3.269157e-01
+Cash.Flow.to.Liability                                   1.811064e-02
+CFO.to.Assets                                            1.435289e-01
+Cash.Flow.to.Equity                                     -2.918843e-01
+Current.Liability.to.Current.Assets                      4.938061e-01
+Liability.Assets.Flag                                    7.259994e-01
+Net.Income.to.Total.Assets                              -2.324745e+00
+Total.assets.to.GNP.price                                1.930062e-11
+No.credit.Interval                                       3.497642e-01
+Gross.Profit.to.Sales                                    1.858374e+03
+Net.Income.to.Stockholder.s.Equity                       2.389112e+00
+Liability.to.Equity                                      8.926857e+00
+Degree.of.Financial.Leverage..DFL.                       2.682117e-01
+Interest.Coverage.Ratio..Interest.expense.to.EBIT.       2.465703e-01
+Net.Income.Flag                                                    NA
+Equity.to.Liability                                      2.526685e-01</code></pre>
+</div>
+</div>
+<p>Загалом, з рівнем довіри 95%, ми бачимо, що більшість коефіцієнтів, крім <strong>Gross national income (GNI) per capita, GNI per capita rank minus HDI rank мають довірчі інтервали, які містять нуль, що свідчить про те, що ці коефіцієнт можуть не мати значимого впливу на залежну змінну при розгляді інших незалежних змінних. Загалом, з рівнем довіри 95%, ми бачимо, що коефіцієнти ROA(C) before interest and depreciation before interest, ROA(B) before interest and depreciation after tax, Operating Gross Margin, Realized Sales Gross Margin, Operating Profit Rate, Pre-tax net Interest Rate, After-tax net Interest Rate, Non-industry income and expenditure/revenue, Continuous interest rate (after tax), Operating Expense Rate, Research and development expense rate, Cash flow rate, Interest-bearing debt interest rate, Tax rate (A), Net Value Per Share (B), Net Value Per Share (A), Net Value Per, Share (C), Persistent EPS in the Last Four Seasons, Cash Flow Per Share, Per Share (Yuan ), Operating Profit Per Share (Yuan ), Per Share Net profit before tax (Yuan ), Realized Sales Gross Profit Growth Rate, Operating Profit Growth Rate, Persistent EPS in the Last Four Seasons, Cash Flow Per Share, Revenue Per Share (Yuan ), Operating Profit Per Share (Yuan ), Per Share Net profit before tax (Yuan ), Realized Sales Gross Profit Growth Rate, Operating Profit Growth Rate, Continuous Net Profit Growth Rate, Total Asset Growth Rate, Total Asset Return Growth Rate Ratio, Cash Reinvestment %, Current Ratio, Quick Ratio, Total debt/Total net worth, Debt</strong> <strong>ratio %, Net worth/Assets, Long-term fund suitability ratio (A), Contingent liabilities/Net worth, Operating profit/Paid-in capital, Net profit before tax/Paid-in capital, Inventory and accounts receivable/Net value, Total Asset Turnover, Accounts Receivable Turnover, Average Collection Days, Inventory Turnover Rate (times), Fixed Assets Turnover Frequency, Net Worth Turnover Rate (times), Revenue per person, Operating profit per person, Allocation rate per person, Working Capital to Total Assets, Quick Assets/Total Assets, Current Assets/Total Assets, Cash/Total Assets, Quick Assets/Current Liability, Cash/Current Liability, Current Liability to Assets, Operating Funds to Liability, Inventory/Working Capital, Inventory/Current Liability, Current Liabilities/Liability, Current Liabilities/Equity, Long-term Liability to Current Assets, Retained Earnings to Total Assets, Total income/Total expense, Total expense/Assets, Current Asset Turnover Rate, Working capitcal Turnover Rate, Cash Turnover Rate, Cash Flow to Sales, Fixed Assets to Assets, Current Liability to Liability, Current Liability to Equity, Equity to Long-term Liability, Cash Flow to Total Assets, Cash Flow to Liability,CFO to Assets, Cash Flow to Equity, Current Liability to Current Assets, Net Income to Total Assets, No-credit Interval, Gross Profit to Sales, Liability to Equity, Degree of Financial Leverage (DFL)</strong> мають довірчі інтервали, які містять нуль, що свідчить про те, що ці коефіцієнт можуть не мати значимого впливу на залежну змінну при розгляді інших незалежних змінних.</p>
+<p>На підставі аналізу отриманих даних можна зробити висновок, що модель з усіма змінними показує високу прогностичну точність. Однак, розглядаючи результати довірчого інтервалу, виявляється, що деякі змінні не мають статистично значущого впливу на залежну змінну. Тому розглянемо можливість скорочення кількості атрибутів.</p>
+<section id="модель-з-використанням-декількох-змінних" class="level3">
+<h3 class="anchored" data-anchor-id="модель-з-використанням-декількох-змінних">Модель з використанням декількох змінних</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>MLR <span class="ot">&lt;-</span> data </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>MLR_lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Bankrupt.</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">ROA.C..before.interest.and.depreciation.before.interest</span><span class="st">`</span> <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">Net.Value.Per.Share..C.</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">After.tax.Net.Profit.Growth.Rate</span><span class="st">`</span> <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">Net.Value.Growth.Rate</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Borrowing.dependency</span><span class="st">`</span> <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">Quick.Asset.Turnover.Rate</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">Liability.Assets.Flag</span><span class="st">`</span> <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">Equity.to.Liability</span><span class="st">`</span>, <span class="at">data =</span> MLR)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(MLR_lm_1)</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Bankrupt. ~ ROA.C..before.interest.and.depreciation.before.interest + 
+    Net.Value.Per.Share..C. + After.tax.Net.Profit.Growth.Rate + 
+    Net.Value.Growth.Rate + Borrowing.dependency + Quick.Asset.Turnover.Rate + 
+    Liability.Assets.Flag + Equity.to.Liability, data = MLR)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.07583 -0.05068 -0.02882 -0.00228  1.03847 
+
+Coefficients:
+                                                          Estimate Std. Error
+(Intercept)                                             -3.327e-01  1.144e-01
+ROA.C..before.interest.and.depreciation.before.interest -5.878e-01  3.919e-02
+Net.Value.Per.Share..C.                                 -1.120e-01  7.024e-02
+After.tax.Net.Profit.Growth.Rate                        -4.134e-02  1.467e-01
+Net.Value.Growth.Rate                                    1.779e-11  1.930e-11
+Borrowing.dependency                                     1.915e+00  1.327e-01
+Quick.Asset.Turnover.Rate                                6.087e-14  6.058e-13
+Liability.Assets.Flag                                    8.004e-01  6.753e-02
+Equity.to.Liability                                     -1.414e-01  4.142e-02
+                                                        t value Pr(&gt;|t|)    
+(Intercept)                                              -2.908 0.003653 ** 
+ROA.C..before.interest.and.depreciation.before.interest -15.000  &lt; 2e-16 ***
+Net.Value.Per.Share..C.                                  -1.594 0.111029    
+After.tax.Net.Profit.Growth.Rate                         -0.282 0.778116    
+Net.Value.Growth.Rate                                     0.922 0.356519    
+Borrowing.dependency                                     14.424  &lt; 2e-16 ***
+Quick.Asset.Turnover.Rate                                 0.100 0.919965    
+Liability.Assets.Flag                                    11.853  &lt; 2e-16 ***
+Equity.to.Liability                                      -3.415 0.000642 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1665 on 6810 degrees of freedom
+Multiple R-squared:  0.1131,    Adjusted R-squared:  0.1121 
+F-statistic: 108.6 on 8 and 6810 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><strong>t-критерій</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="dv">6810</span>))</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.645077</code></pre>
+</div>
+</div>
+<p>Можна зробити висновок, що еу всі коефіцієнти в моделі мають значення t-критерію, чия абсолютна величина перевищує 1.645077. Це свідчить про статистичну не значущість цих коефіцієнтів і дозволяє відкинути гіпотезу про їхню значимість.</p>
+<p><strong>F-критерій</strong>: Значення f-статистики досить високе (108.6), що підтверджує наявність статистично значущого взаємозв’язку між змінними в моделі.</p>
+<p><strong>P-значення</strong>: Значення p-value дуже мале (p-value &lt; 2.2e-16), що свідчить про наявність статистично значущого взаємозв’язку між змінними в моделі. Це означає, що ймовірність отримати спостережуване значення статистики при правильності нульової гіпотези дуже низька.</p>
+<p><strong>Коефіцієнт детермінації</strong>: У даній моделі скорегований коефіцієнт детермінації становить 11,2%. Це означає, що 11,2% варіації залежної змінної можна пояснити за допомогою незалежних змінних в моделі.</p>
+<p><strong>Довірчі інтервали</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(MLR_lm_1)</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                2.5 %
+(Intercept)                                             -5.569181e-01
+ROA.C..before.interest.and.depreciation.before.interest -6.646224e-01
+Net.Value.Per.Share..C.                                 -2.496467e-01
+After.tax.Net.Profit.Growth.Rate                        -3.289199e-01
+Net.Value.Growth.Rate                                   -2.003493e-11
+Borrowing.dependency                                     1.654414e+00
+Quick.Asset.Turnover.Rate                               -1.126749e-12
+Liability.Assets.Flag                                    6.679977e-01
+Equity.to.Liability                                     -2.226334e-01
+                                                               97.5 %
+(Intercept)                                             -1.083849e-01
+ROA.C..before.interest.and.depreciation.before.interest -5.109821e-01
+Net.Value.Per.Share..C.                                  2.574500e-02
+After.tax.Net.Profit.Growth.Rate                         2.462429e-01
+Net.Value.Growth.Rate                                    5.562204e-11
+Borrowing.dependency                                     2.174850e+00
+Quick.Asset.Turnover.Rate                                1.248499e-12
+Liability.Assets.Flag                                    9.327434e-01
+Equity.to.Liability                                     -6.024359e-02</code></pre>
+</div>
+</div>
+<p>У таблиціє довірчих інтервалів 95%, що містять нуль, отже коефіцієнти Net.Value.Per.Share..C., After.tax.Net.Profit.Growth.Rate , Net.Value.Growth.Rate , Quick.Asset.Turnover.Rate є статистично незначущими на рівні значущості 0,05.</p>
+<p>Висновок: Отже, дана модель є кращою для майбутніх досліджень з точки зору інтерпритації, однак гіршою з точки зору прогнозування. Проте, також потрібно дослідити наші моделі на явище гетероскедастичності.</p>
+</section>
+</section>
+</section>
+<section id="дослідження-автокореляції" class="level1">
+<h1>Дослідження автокореляції</h1>
+<p><strong>Автокореляція</strong> виникає, коли спостереження у часовому ряді або просторовій послідовності є взаємозалежними. Це означає, що значення однієї змінної можуть бути залежними від попередніх значень цієї ж змінної або інших змінних. Автокореляція може мати важливі наслідки для аналізу даних, так як вона може спотворювати статистичні оцінки та впливати на правильність висновків.</p>
+<p>Для виявлення автокореляції використовується коефіцієнт автокореляції, який знаходиться у діапазоні від -1 до 1. Значення близьке до 1 вказує на сильну автокореляцію, де попередні значення сильно впливають на наступні. Значення близьке до 0 вказує на слабку або відсутню автокореляцію. Значення близьке до -1 вказує на зворотну автокореляцію, де попередні значення мають протилежний вплив на наступні.</p>
+<p>Автокореляція може виникати у випадках, коли спостереження в часовому ряді є близькими в часі або коли є неспостережувані фактори, що впливають на “сусідні” спостереження.</p>
+<p>Ми звертаємо увагу на автокореляцію, оскільки вона може викликати проблеми при оцінці моделей та робити недостовірні висновки. Навіть у простих ситуаціях автокореляція може призводити до того, що оцінки коефіцієнтів моделі не будуть надійними при зростанні кількості спостережень. Отже, враховування автокореляції є важливим аспектом при аналізі даних.</p>
+<p>##Візуальна перевірка на присутність автокореляції</p>
+<p>Для першої моделі:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(MLR_lm<span class="sc">$</span>residuals, <span class="at">type =</span> <span class="st">"correlation"</span>)</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Coursework_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Для другої моделі:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(MLR_lm_1<span class="sc">$</span>residuals, <span class="at">type =</span> <span class="st">"correlation"</span>)</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Coursework_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Графіки демонструють взаємодію між автокорельованими залишками, і їх інтерпретація є простою. На графіках кожна вісь x представляє різні лаги, що відповідають числу періодів, на яких обчислюється коефіцієнт автокореляції. Вісь y відображає кореляцію для кожного з відставань. Пунктирна блакитна лінія показує рівень значущості.</p>
+<p>Перша вертикальна лінія, де лаг дорівнює 0, показує кореляцію залишків з їх самих собою і завжди має значення 100%.</p>
+<p>У випадку відсутності автокореляції наступні вертикальні смуги швидко зменшуються, як це спостерігається в обох моделях.</p>
+<section id="тест-дарбіна-вотсона" class="level2">
+<h2 class="anchored" data-anchor-id="тест-дарбіна-вотсона">Тест Дарбіна-Вотсона</h2>
+<p>Тест Дарбіна-Вотсона - це статистичний метод перевірки автокореляції першого порядку в результатах регресійного аналізу. Він дозволяє виявити наявність залежності між послідовними залишками регресійної моделі. Тест Дарбіна-Вотсона є інструментом для оцінки автокореляції та перевірки гіпотези про її відсутність.</p>
+<p>Для першої моделі:</p>
+<p>DW-статистика менше 2 в обох моделях, що свідчить про наявність позитивної автокореляції. У другій моделі p-значення менше 0.05, що дозволяє відхилити гіпотезу про відсутність автокореляції першого порядку. У першій моделі p-значення більше 0.05, що говорить про те, що дана гіпотеза може бути прийнята.</p>
+<p>#Перевірка моделі на явність явища гетероскедастичності Гетероскедастичність відноситься до ситуації, коли випадкові величини в моделі мають різну дисперсію. Це може впливати на точність оцінок моделі, оскільки стандартні помилки оцінок стають неточними. ##Проведення тесту на явище гетероскедастичності</p>
+<p>Існує декілька методів перевірки гетероскедастичності, одним з яких є тест Бройша-Пагана.</p>
+<p>Тест Бройша-Пагана базується на оцінці гетероскедастичних стандартних помилок шляхом побудови допоміжної регресії, де залежна змінна є квадратом залишків основної регресії, а незалежні змінні - це оцінки залишків кожного з екзогенних факторів. Далі, проводиться статистичне тестування на наявність впливу цих екзогенних факторів на гетероскедастичність.</p>
+<p>Для обчислення статистики тесту Бройша-Пагана необхідно перемножити значення R-квадрат (визначене за основною регресією) на розмір вибірки. Отримана статистика розподілена за хі-квадрат розподілом зі ступенями свободи, які дорівнюють числу оцінюваних параметрів в допоміжній регресії мінус один.</p>
+<p>Таким чином, для проведення тесту Бройша-Пагана необхідно виконати наступні кроки:</p>
+<p>Побудувати основну регресію і отримати оцінки залишків. Побудувати допоміжну регресію, де залежна змінна - це квадрат залишків з основної регресії, а незалежні змінні - це оцінки залишків кожного з екзогенних факторів. Оцінити параметри допоміжної регресії і отримати R-квадрат. Помножити значення R-квадрат на розмір вибірки. Порахувати статистику тесту, яка має хі-квадрат розподіл зі ступенями свободи, рівними числу оцінюваних параметрів в допоміжній регресії мінус один. Здійснити статистичне тестування, порівнявши отриману статистику з критичним значенням хі-квадрат розподілу.</p>
+<p>Але в мові програмування R є чудова функція <strong>bptest</strong>, яка провадить розрахунки самостійно.</p>
+<p>Тест для першої моделі:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>white_test <span class="ot">&lt;-</span> <span class="fu">bptest</span>(MLR_lm)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>white_test</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  MLR_lm
+BP = 1079.3, df = 90, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Тест для другої моделі:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>white_test <span class="ot">&lt;-</span> <span class="fu">bptest</span>(MLR_lm_1)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>white_test</span></code><button title="Копіювати" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  MLR_lm_1
+BP = 513.14, df = 8, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Результати тесту Бройша-Пагана показують наступні значення статистики BP і ступенів свободи df:</p>
+<p>Для моделі “MLR_lm_1”:</p>
+<p>BP = 513.14 df = 8 p-value &lt; 2.2e-16 Для моделі “MLR_lm”:</p>
+<p>BP = 1079.3 df = 90 p-value &lt; 2.2e-16 Ці результати свідчать про статистичну значущість тесту Бройша-Пагана в обох моделях. Низькі значення p-значення вказують на відхилення від нульової гіпотези про відсутність гетероскедастичності.</p>
+<p>Отже, можна зробити висновок, що обидві моделі підтверджують наявність гетероскедастичності, тобто дисперсія помилок моделі залежить від значень залежних змінних.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопійовано!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
